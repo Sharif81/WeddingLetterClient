@@ -1,0 +1,88 @@
+<div class="card">
+  <div class="card-header bg-danger text-light">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addPackages">
+      <i class="fa-solid fa-square-plus"></i> Add Packages
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addPackages" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-danger">
+            <h3 class="modal-title fs-5" id="staticBackdropLabel">Add Packages</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="packagesForm" (ngSubmit)="savePackages()">
+              <div class="row">
+                <div class="col-md-7">
+                  <div class="form-group">
+                    <label for="name" class="form-label text-dark fw-bold">Name <span
+                        class="text-danger">*</span></label>
+                    <input type="text" id="name" class="form-control" placeholder="e.g: Holud | Wedding" name="name"
+                      formControlName="name">
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="price" class="form-label text-dark fw-bold">Price <span
+                        class="text-danger">*</span></label>
+                    <input type="text" id="price" class="form-control" placeholder="e.g: 45,000.00" name="price"
+                      formControlName="price">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="description" class="form-label text-dark fw-bold">Description <span
+                        class="text-danger">*</span></label>
+                    <textarea type="text" id="description" class="form-control"
+                      placeholder="e.g: 1. Two Photographer, 2. Duration: Six Hours || Unlimited Click, 3. Two Album Consists Of Three Hundred Edited Photos"
+                      name="address" formControlName="description"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer form-group mt-4">
+                <button type="submit" class="btn btn-dark"> <i class="fa-solid fa-floppy-disk"></i> Save</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered text-center table-sm">
+        <thead class="table-danger">
+          <tr>
+            <th scope="col">SL#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let package of packages let i=index">
+            <th>{{i+1}}</th>
+            <td>{{package.name}}</td>
+            <td>{{package.description}}</td>
+            <td>{{package.price | currency:"BDT " }}</td>
+            <td class="d-flex justify-content-around">
+              <button type="button" class="btn btn-sm btn-dark"><i class="fa-solid fa-edit"></i></button>
+              <button type="button" (click)="onPackageDelete(package.id)" class="btn btn-sm btn-danger"><i
+                  class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

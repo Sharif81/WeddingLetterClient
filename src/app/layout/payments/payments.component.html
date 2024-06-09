@@ -1,0 +1,117 @@
+<div class="card">
+    <div class="card-header bg-danger">
+        <h5>Payments</h5>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="paymentsForms" (ngSubmit)="addPayments()">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="date" class="form-label text-dark fw-bold">Payment Date <span
+                            class="text-danger">*</span></label>
+                    <input type="date" id="date" class="form-control" name="date" formControlName="date">
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="invoiceId" class="form-label text-dark fw-bold">Client Invoice <span
+                            class="text-danger">*</span></label>
+                    <select formControlName="invoiceId" class="form-control" (change)="onClientSelect($event)">
+                        <option value="">Select a Client Invoice</option>
+                        <option [value]="client?.clientName" *ngFor="let client of events">{{client?.clientName}} - {{client.invoiceID}}
+                        </option>
+                    </select>    
+                    <input type="hidden" formControlName="eventId">               
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="totalAmount" class="form-label text-dark fw-bold">Total Amount <span
+                            class="text-danger">*</span></label>
+                    <input type="number" id="totalAmount" class="form-control" name="totalAmount"
+                        formControlName="totalAmount" placeholder="e.g: 50,000.00" [readOnly]="true">
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="paidAmount" class="form-label text-dark fw-bold">Paid Amount <span
+                            class="text-danger">*</span></label>
+                    <input type="number" id="paidAmount" class="form-control" name="paidAmount"
+                        formControlName="paidAmount" placeholder="e.g: 5,000.00">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="paidBy" class="form-label text-dark fw-bold">Payment Method<span
+                            class="text-danger">*</span></label>
+                    <select name="paidBy" id="paidBy" class="form-control" formControlName="paidBy">
+                        <option value="">Select an Option</option>
+                        <option value="cash">Cash </option>
+                        <option value="bank">Bank </option>
+                        <option value="bkash">Bkash </option>
+                        <option value="nagad">Nagad </option>
+                        <option value="rocket">Rocket </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="due" class="form-label text-dark fw-bold">Due Amount <span
+                            class="text-danger">*</span></label>
+                    <input type="number" id="due" class="form-control" name="due"
+                        formControlName="due" placeholder="e.g: 45,000.00" [readOnly]="true">
+                </div>
+            </div>
+            <div class="col-md-2" style="margin-top: 30px">
+                <div class=" form-group">
+                    <button type="submit" class="btn btn-dark"> <i class="fa-solid fa-floppy-disk"></i> Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+   
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-header">
+        <h5>Payment Details</h5>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered text-center table-sm">
+                <thead class="table-danger">
+                    <tr>
+                        <th scope="col">SL#</th>
+                        <th scope="col">Payment Date</th>
+                        <th scope="col">Client Invoice</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Paid Amount</th>
+                        <th scope="col">Payment Method</th>
+                        <th scope="col">Amount Due</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let payment of payments; let i=index" >
+                        <th>{{i+1}}</th>
+                        <td>{{payment.date | date:"EEEE, MMMM d, y" }}</td>
+                        <td>{{payment.invoiceId}}</td>
+                        <td>{{payment.totalAmount | currency:"BDT "}}</td>
+                        <td>{{payment.paidAmount | currency:"BDT "}}</td>
+                        <td>{{payment.paidBy}}</td>
+                        <td>{{payment.due | currency:"BDT "}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- {{this.paymentsForms.value | json}} -->
+</div>

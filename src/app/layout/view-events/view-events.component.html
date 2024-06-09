@@ -1,0 +1,103 @@
+<div class="card">
+    <div class="card-header bg-danger">
+        <h5>Events</h5>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered text-center table-sm w-100">
+                <thead class="table-danger">
+                    <tr>
+                        <th scope="col" style="width: 100px;">Invoice ID#</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Client</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Event</th>
+                        <th scope="col">Discription</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total Event</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Discount</th>
+                        <th scope="col">Payable Amount</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let event of events; let i = index">
+                        <!-- <th>{{i+1}}</th> -->
+                        <th>{{event.invoiceID}}</th>
+                        <td>{{event.date | date:"EEEE, MMMM d, y" }}</td>
+                        <td>{{event.clientName}}</td>
+                        <td>{{event.contact}}</td>
+                        <td>{{event.address}}</td>
+                        <td>{{event.eventName}}</td>
+                        <td>{{event.eventDescription}}</td>
+                        <td>{{event.price | currency:"BDT "}}</td>
+                        <td>{{event.totalEvent}}</td>
+                        <td>{{event.amount | currency:"BDT "}}</td>
+                        <td>{{event.discount}}</td>
+                        <td>{{event.payableAmount | currency:"BDT "}}</td>
+                        <td class="d-flex justify-content-around">
+                            <button type="button" class="btn btn-sm bg-danger" data-bs-toggle="modal"
+                                data-bs-target="#showPrograms" (click)="showPrograms(event.id)"><i
+                                    class="fa-solid text-light fa-lg fa-bars"></i></button>
+                            <button type="button" class="btn btn-sm btn-light"><i class="fa-solid text-danger fa-2xl fa-file-pdf"></i></button>                          
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="showPrograms" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-light">
+                <h3 class="modal-title fs-5" id="staticBackdropLabel">Programs</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered text-center table-sm">
+                                <thead class="table-danger">
+                                    <tr>
+                                        <th scope="col">SL#</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Program</th>
+                                        <th scope="col">Venue</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let event of events">
+                                        <ng-container *ngIf="event.id === selectedEventId">
+                                            <tr *ngFor="let program of event.programs; let j=index">
+                                                <td>{{j+1}}</td>
+                                                <td>{{ program.date | date:"EEEE, MMMM d, y" }}</td>
+                                                <td>{{ program.programName }}</td>
+                                                <td>{{ program.vanue }}</td>
+                                                <td class="d-flex justify-content-around">
+                                                    <button type="button" class="btn btn-sm btn-dark"><i
+                                                            class="fa-solid fa-edit"></i></button>
+                                                    <button type="button" class="btn btn-sm btn-danger"><i
+                                                            class="fa-solid fa-trash"></i></button>
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

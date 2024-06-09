@@ -1,0 +1,48 @@
+<div class="row mt-5">
+  <div class="d-flex justify-content-center">
+    <div class="card shadow-sm p-5 bg-body-light rounded">
+      <form [formGroup]="userForm" (ngSubmit)="addUsers()">
+        <div class="text-center mb-4">
+          <img src="./assets/images/WL_New_Black.png" alt="Description of the image" width="200px">
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="firstName" placeholder="eg: Jhon" name="firstName"
+                formControlName="firstName">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastName" placeholder="eg: Herry" name="lastName"
+                formControlName="lastName">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" class="form-control" id="email" placeholder="eg: Jhon.herry@gmail.com" name="email"
+            formControlName="email">
+        </div>
+        <div class="mb-3">
+          <label for="Password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="eg: Jhon@12" name="password"
+            formControlName="password">
+        </div>
+        <div class="mb-3">
+          <label for="Password" class="form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" placeholder="eg: Jhon@12"
+            name="confirmPassword" formControlName="confirmPassword">
+        </div>
+        <div class="mb-3 form-text">
+          Already Registerd? Please <a [routerLink]="['/login']"> Login</a>
+        </div>
+        <button type="submit" class="btn btn-danger"><i class="fa-solid fa-right-to-bracket"></i> Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div>

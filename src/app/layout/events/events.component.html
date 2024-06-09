@@ -1,0 +1,209 @@
+<div class="card">
+    <div class="card-header bg-danger">
+        <h5>Create Events</h5>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="eventsProgramForms" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="date" class="form-label text-dark fw-bold">Date <span
+                                class="text-danger">*</span></label>
+                        <input type="date" id="date" class="form-control" name="date" formControlName="date">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="clientName" class="form-label text-dark fw-bold">Client Name <span
+                                class="text-danger">*</span></label>
+                        <input type="text" id="clientName" class="form-control" placeholder="e.g: Alex Sundry"
+                            name="clientName" formControlName="clientName">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="contact" class="form-label text-dark fw-bold">Phone <span
+                                class="text-danger">*</span></label>
+                        <input type="text" id="contact" class="form-control" placeholder="e.g: 01828-775681"
+                            name="contact" formControlName="contact">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="address" class="form-label text-dark fw-bold">Address <span
+                                class="text-danger">*</span></label>
+                        <textarea type="text" id="address" class="form-control"
+                            placeholder="e.g: 123 King Street, Melbourne Victoria 5000, New York." name="address"
+                            formControlName="address"></textarea>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card mt-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="eventsName" class="form-label text-dark fw-bold">Events Name <span
+                                        class="text-danger">*</span></label>
+                                <select formControlName="eventName" class="form-control"
+                                    (change)="onPackageSelect($event)">
+                                    <option value="" selected>Select an Event</option>
+                                    <option *ngFor="let pkg of packages" [value]="pkg?.name">{{pkg?.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="price" class="form-label text-dark fw-bold">Price <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" id="price" class="form-control" [value]="selectedPackage?.price"
+                                    placeholder="e.g: 28,000.00" name="price" formControlName="price" [readOnly]="true">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="totalEvent" class="form-label text-dark fw-bold">Total Events <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" id="totalEvent" class="form-control" placeholder="e.g: 2"
+                                    name="totalEvent" formControlName="totalEvent">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="amount" class="form-label text-dark fw-bold">Amount <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" id="amount" class="form-control" placeholder="e.g: 56,000.00"
+                                    name="amount" formControlName="amount" [readonly]="true">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="discount" class="form-label text-dark fw-bold">Discount <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" id="discount" class="form-control" placeholder="e.g: 10 %"
+                                    name="discount" formControlName="discount">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="paybleAmount" class="form-label text-dark fw-bold">Payable Amount <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" id="payableAmount" class="form-control"
+                                    placeholder="e.g: 50,400.00" name="payableAmount" formControlName="payableAmount"
+                                    [readonly]="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="eventDescription" class="form-label text-dark fw-bold">Description <span
+                                        class="text-danger">*</span></label>
+                                <textarea type="text" id="eventDescription" class="form-control"
+                                    [value]="selectedPackage?.description"
+                                    placeholder="e.g: 1. Two Photographer, 2. Duration: Six Hours || Unlimited Click, 3. Two Album Consists Of Three Hundred Edited Photos"
+                                    name="eventDescription" formControlName="eventDescription"
+                                    [readOnly]="true"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <div class="card mt-2">
+                <div class="card-header">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addEvents"
+                        [disabled]="!eventsProgramForms.valid">
+                        <i class="fa-solid fa-square-plus"></i> Add Program
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="addEvents" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header bg-danger text-light">
+                                    <button type="button" (click)="addProgram()" class="btn btn-dark"><i
+                                            class="fa-solid fa-circle-plus"></i>
+                                        New Program</button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" formArrayName="programs">
+                                    <div class="row" *ngFor="let program of programsArray.controls; let i=index"
+                                        [formGroupName]="i">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="date" class="form-label text-dark fw-bold">Date <span
+                                                        class="text-danger">*</span></label>
+                                                <input type="date" id="date" class="form-control" name="date"
+                                                    formControlName="date">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label for="programName" class="form-label text-dark fw-bold">Program
+                                                    <span class="text-danger">*</span></label>
+                                                <input type="text" id="programName" class="form-control"
+                                                    placeholder="e.g: Holud" name="programName"
+                                                    formControlName="programName">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="venue" class="form-label text-dark fw-bold">Venue <span
+                                                        class="text-danger">*</span></label>
+                                                <select name="venue" id="venue" class="form-control" formControlName="vanue">
+                                                    <option value="" selected>Select an Venue</option>
+                                                    <option *ngFor="let venue of venues" [value]="venue?.name">
+                                                        {{venue?.name}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1" style="margin-top: 33px;">
+                                            <button type="button" class="btn btn-danger btn-sm"
+                                                (click)="removeProgram(i)"><i class="fa-solid fa-trash"></i></button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-dark" [disabled]="areProgramsValid()"> <i
+                                            class="fa-solid fa-floppy-disk"></i>
+                                        Save</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {{this.eventsProgramForms.value | json}}
+    </div>
+</div>

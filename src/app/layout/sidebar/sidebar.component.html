@@ -1,0 +1,67 @@
+<div class="sidebar">
+  <a routerLink="/" routerLinkActive="active-link" class="text-decoration-none">
+    <i class="fa-solid fa-gauge-high"></i> Dashboard
+  </a>
+
+  <a data-bs-toggle="collapse" href="#events" aria-controls="collapseExample"
+    class="dropdown-toggle text-decoration-none">
+    <i class="fa-solid fa-camera-retro"></i> Events
+  </a>
+  <ul class="collapse list-unstyled" id="events">
+    <li>
+      <a routerLink="/create-events" routerLinkActive="active-link" class="text-decoration-none small">
+        <i class="fa-solid fa-angles-right"></i> Create Events
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/view-events" routerLinkActive="active-link" class="text-decoration-none small">
+        <i class="fa-solid fa-angles-right"></i> Invoice
+      </a>
+    </li>
+  </ul>
+
+  <a routerLink="/payments" routerLinkActive="active-link" class="text-decoration-none">
+    <i class="fa-solid fa-money-check-dollar"></i> Payments</a>
+
+
+  <a routerLink="/" routerLinkActive="active-link" class="text-decoration-none"><i class="fa-solid fa-gear"></i>
+    Setting</a>
+
+
+  <a routerLink="/message" routerLinkActive="active-link" class="text-decoration-none"><i class="fas fa-envelope"></i>
+    Messages</a>
+  <a routerLink="/analytics" routerLinkActive="active-link" class="text-decoration-none"><i
+      class="fas fa-chart-bar"></i>
+    Analytics</a>
+
+  <a data-bs-toggle="collapse" href="#initialSetup" aria-controls="collapseExample"
+    class="dropdown-toggle text-decoration-none">
+    <i class="fa-solid fa-screwdriver-wrench"></i> Intial Setup
+  </a>
+  <ul class="collapse list-unstyled" id="initialSetup">
+    <li>
+      <a routerLink="/companies" routerLinkActive="active-link" class="text-decoration-none small">
+        <i class="fa-solid fa-angles-right"></i> Add Company
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/packages" routerLinkActive="active-link" class="text-decoration-none small">
+        <i class="fa-solid fa-angles-right"></i> Add Packages
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/venue" routerLinkActive="active-link" class="text-decoration-none small">
+        <i class="fa-solid fa-angles-right"></i> Add Venue
+      </a>
+    </li>
+
+  </ul>
+</div>
+
+<!-- Page Content -->
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

@@ -30,9 +30,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",             
+              "./node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "./node_modules/sweetalert2/dist/sweetalert2.min.css"
             ],
-            "scripts": [],
+            "scripts": [              
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",              
+              "./node_modules/sweetalert2/dist/sweetalert2.all.min.js"
+              
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -102,5 +109,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "a03ddede-0d15-4ad5-98dc-25a0575f4dad"
   }
 }

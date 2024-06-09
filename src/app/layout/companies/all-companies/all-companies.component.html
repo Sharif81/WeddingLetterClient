@@ -1,0 +1,99 @@
+<div class="card">
+  <div class="card-header bg-danger text-light">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#addCompany">
+      <i class="fa-solid fa-square-plus"></i> Add Company
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addCompany" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header bg-danger">
+            <h3 class="modal-title fs-5" id="staticBackdropLabel">Add Company</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="bookForm" (ngSubmit)="saveCompany()">
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="name" class="form-label text-dark fw-bold">Name <span
+                        class="text-danger">*</span></label>
+                    <input type="text" id="name" class="form-control" placeholder="e.g: Wedding Letter" name="name"
+                      formControlName="name">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="email" class="form-label text-dark fw-bold">Email <span
+                        class="text-danger">*</span></label>
+                    <input type="text" id="email" class="form-control" placeholder="e.g: admin@email.com" name="email"
+                      formControlName="email">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="phone" class="form-label text-dark fw-bold">Phone <span
+                        class="text-danger">*</span></label>
+                    <input type="text" id="mobile" class="form-control" placeholder="e.g: 01700225581" name="mobile"
+                      formControlName="mobile">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="address" class="form-label text-dark fw-bold">Address <span
+                        class="text-danger">*</span></label>
+                    <textarea type="text" id="address" class="form-control"
+                      placeholder="e.g: 123 King Street, Melbourne Victoria 5000, New York." name="address"
+                      formControlName="address"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer form-group mt-4">
+                <button type="submit" class="btn btn-dark"> <i class="fa-solid fa-floppy-disk"></i> Save</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered text-center table-sm">
+        <thead class="table-danger">
+          <tr>
+            <th scope="col">SL#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Mobile</th>
+            <th scope="col">Address</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let company of companies; let i = index">
+            <th>{{i+1}}</th>
+            <td>{{company.name}}</td>
+            <td>{{company.email}}</td>
+            <td>{{company.mobile}}</td>
+            <td>{{company.address}}</td>
+            <td class="d-flex justify-content-around">
+              <button type="button" class="btn btn-sm btn-dark"><i class="fa-solid fa-edit"></i></button>
+              <button (click)="onDelete(company.id)" type="button" class="btn btn-sm btn-danger"><i
+                  class="fa-solid fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
