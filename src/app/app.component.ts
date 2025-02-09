@@ -10,7 +10,6 @@ import { EventsComponent } from './layout/events/events.component';
 import { VenueComponent } from './layout/venue/venue.component';
 
 
-
 @Component({
   selector: 'app-root',
   standalone: true,

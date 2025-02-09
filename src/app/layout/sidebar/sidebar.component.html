@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div *ngIf="isLoggedIn$ | async"  class="sidebar">
   <a routerLink="/" routerLinkActive="active-link" class="text-decoration-none">
     <i class="fa-solid fa-gauge-high"></i> Dashboard
   </a>
@@ -24,17 +24,6 @@
   <a routerLink="/payments" routerLinkActive="active-link" class="text-decoration-none">
     <i class="fa-solid fa-money-check-dollar"></i> Payments</a>
 
-
-  <a routerLink="/" routerLinkActive="active-link" class="text-decoration-none"><i class="fa-solid fa-gear"></i>
-    Setting</a>
-
-
-  <a routerLink="/message" routerLinkActive="active-link" class="text-decoration-none"><i class="fas fa-envelope"></i>
-    Messages</a>
-  <a routerLink="/analytics" routerLinkActive="active-link" class="text-decoration-none"><i
-      class="fas fa-chart-bar"></i>
-    Analytics</a>
-
   <a data-bs-toggle="collapse" href="#initialSetup" aria-controls="collapseExample"
     class="dropdown-toggle text-decoration-none">
     <i class="fa-solid fa-screwdriver-wrench"></i> Intial Setup
@@ -59,7 +48,12 @@
     </li>
 
   </ul>
+
+ 
 </div>
+
+ 
+
 
 <!-- Page Content -->
 <div class="content">

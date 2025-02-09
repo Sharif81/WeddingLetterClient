@@ -1,7 +1,7 @@
 <div class="row mt-5">
   <div class="d-flex justify-content-center">
     <div class="card shadow-sm p-5 bg-body-light rounded">
-      <form>
+      <form [formGroup]="loginForm" (ngSubmit)="userLogin()">
         <div class="text-center mb-3">
           <img src="./assets/images/WL_New_Black.png" alt="Description of the image" width="200px">
         </div>

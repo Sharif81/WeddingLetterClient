@@ -7,11 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class LoginService {
 
-  private APIPath = 'https://localhost:44315/api/Account/login'
+  private baseUrl = 'https://localhost:44315/api/'
   constructor(private http: HttpClient) { }
 
   public login(user: any): Observable<any> {
-    return this.http.post<any>(this.APIPath, user);
+    return this.http.post<any>(this.baseUrl + 'Account/login', user);
   }
 }
 
