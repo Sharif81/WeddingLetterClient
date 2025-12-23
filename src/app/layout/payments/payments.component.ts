@@ -12,11 +12,11 @@ import Swal from 'sweetalert2';
   templateUrl: './payments.component.html',
   styleUrl: './payments.component.scss'
 })
-export class PaymentsComponent implements OnInit{
+export class PaymentsComponent implements OnInit {
 
   public events: any[];
   public paymentsForms: FormGroup;
-  public payments: any [];
+  public payments: any[];
 
   constructor(private eventsServices: EventsService, private paymentsServices: PaymentsService, private formBuilder: FormBuilder) {
 
@@ -27,56 +27,58 @@ export class PaymentsComponent implements OnInit{
     this.paymentsForms = this.formBuilder.group({
       date: ['', Validators.required],
       invoiceId: ['', Validators.required],
+      eventId: [null, Validators.required],
       totalAmount: ['', Validators.required],
       paidAmount: ['', Validators.required],
-      paidBy:['', Validators.required],
-      due: ['', Validators.required],
-      eventId: ['', Validators.required]
+      paidBy: ['', Validators.required],
+      due: ['', Validators.required]
     });
     console.log(this.paymentsForms);
 
-    this.paymentsForms.get('totalAmount')?.valueChanges.subscribe(()=> this.calculateDueAmount());
-    this.paymentsForms.get('paidAmount')?.valueChanges.subscribe(()=> this.calculateDueAmount());
+    this.paymentsForms.get('totalAmount')?.valueChanges.subscribe(() => this.calculateDueAmount());
+    this.paymentsForms.get('paidAmount')?.valueChanges.subscribe(() => this.calculateDueAmount());
 
     this.getClientNameByEvents();
     this.getPayments();
-    
+
+
   }
 
 
-  calculateDueAmount(){
+  calculateDueAmount() {
     const totalAmount = this.paymentsForms.get('totalAmount')?.value;
     const paidAmount = this.paymentsForms.get('paidAmount')?.value;
-    if(totalAmount && paidAmount){
+    if (totalAmount && paidAmount) {
       const dueAmount = totalAmount - paidAmount;
       this.paymentsForms.get('due')?.setValue(dueAmount);
-    }else {
+    } else {
       this.paymentsForms.get('due')?.setValue(null);
     }
   }
 
+
   onClientSelect(event: any): void {
-    const selectClientName = (event.target as HTMLSelectElement).value;
-    const selectedEvents = this.events.find(evts => evts.clientName === selectClientName)
+    const selectedInvoiceId = (event.target as HTMLSelectElement).value;
+    const selectedEvent = this.events.find(evt => evt.invoiceID === selectedInvoiceId);
 
-    if (selectedEvents) {
-      this.paymentsForms.get('eventId')?.setValue(selectedEvents.eventId);
+    if (selectedEvent) {
       this.paymentsForms.patchValue({
-        totalAmount: selectedEvents.payableAmount
+        invoiceId: selectedEvent.invoiceID,
+        totalAmount: selectedEvent.payableAmount,
+        eventId: selectedEvent.EventId,
       });
-    }
-    else {
-      this.paymentsForms.get('eventId')?.setValue(null);
+    } else {
       this.paymentsForms.patchValue({
+        invoiceId: null,
         totalAmount: null,
+        eventId: null,
       });
     }
-
   }
 
 
 
-  getClientNameByEvents(): void{
+  getClientNameByEvents(): void {
     this.eventsServices.getAllEventsWithProgramsAsync().subscribe(result => {
       this.events = result;
       console.log(this.events);
